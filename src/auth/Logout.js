@@ -25,8 +25,6 @@ function Logout(props){
 		dispatch({ type: 'openSnackBar', payload: { severity, text }})
 	}, [dispatch])
 
-	console.log("Logout", props)
-	
 	const handleLogout = data => {
 		firebase.auth().signOut()
 		dispatch({type:'logout'})

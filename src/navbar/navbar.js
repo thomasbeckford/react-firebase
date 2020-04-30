@@ -11,7 +11,7 @@ const Navbar = () => {
     return(
         <AppBar position="static">
             <Toolbar>
-                <Typography display="inline" variant="title" color="inherit">
+                <Typography display="inline" variant="subtitle1" color="inherit">
                   Welcome to home page
                 </Typography>
               <Logout />
