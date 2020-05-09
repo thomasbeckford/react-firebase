@@ -11,6 +11,7 @@
     "dotenv": "^8.2.0",
     "eslint-config-standard": "^14.1.1",
     "firebase": "^7.14.1",
+    "firebase-tools": "^8.2.0",
     "nodemon": "^2.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -47,5 +48,10 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1"
+  },
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
   }
 }

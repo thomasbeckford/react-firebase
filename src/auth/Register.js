@@ -7,39 +7,39 @@ import { severity } from "../snackbar/CustomizedSnackbar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
-export default function Login(props) {
+export default function Register(props) {
 
    const dispatch = useContext(DispatchContext);
-   const { register, handleSubmit,errors , formState } = useForm({ mode: "onChange" });
+   const { register, handleSubmit,errors , formState, watch } = useForm({ mode: "onChange" });
    const [error, setError] = useState("");
+   console.log(props);
 
-   const handleEmailLogin = (data) => {
-      const promise = firebase.auth().signInWithEmailAndPassword(data.email, data.password);
+   const handleRegister = (data) => {
+      const promise = firebase.auth().createUserWithEmailAndPassword(data.email, data.password);
       promise
-         .catch((e) => {
-            setError(e.message);
-         });
+         .then((user) => {
+            if(user){
+               openSnackbar(severity.INFO, "Authenticated.");
+               props.history.push("/home");
+            }
+         })
+         .catch((e) => setError(e.message));
    };
-
-   const handlePasswordReset = (emailReset) =>{
-      return firebase.auth().sendPasswordResetEmail(emailReset);
-   };
-
 
    //Snackbar
    const openSnackbar = useCallback((severity, text) => {
       dispatch({ type: "openSnackBar", payload: { severity, text }});
    }, [dispatch]);
-   
+
    return (
       <div className="sign-in">
          <div>
-            <h1>Login</h1>
+            <h1>Create user</h1>
             <Box color="primary.contrastText" display="flex" >
                <Button
                   variant="contained"
                   color="primary"
-                  onClick={()=>{props.setPage("register");}}>Register
+                  onClick={()=>{props.setPage("login");}}>Login
                </Button>
             </Box>
             <form>
@@ -69,7 +69,23 @@ export default function Login(props) {
                   })}
                />
                {errors.password && <p>{errors.password.message}</p>}
-               <input type="submit" disabled={!formState.isValid} onClick={handleSubmit(handleEmailLogin)} value="LOG IN" />
+               
+               <input 
+                  type="password" 
+                  name="newPassword"
+                  ref={register({
+                     validate: (value) => value === watch("password"),
+                     required: "confirm password is required",
+                     pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "Invalid password",
+                     },
+                  })}
+                  placeholder="Confirm Password"
+                  required
+               />
+               {errors.password && <p>{errors.newPassword.message}</p>}
+               <input type="submit" disabled={!formState.isValid} onClick={handleSubmit(handleRegister)} value="REGISTER" />
             </form>
          </div>
 

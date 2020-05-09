@@ -1,7 +1,13 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "node": true
+    },
+    "settings": {
+        "react": {
+          "version": "detect"
+        }
     },
     "extends": [
         "eslint:recommended",
@@ -23,10 +29,7 @@
         "react"
     ],
     "rules": {
-        "indent": [
-            "warning",
-            3
-        ],
+        "indent":[1, 3],
         "linebreak-style": [
             "error",
             "unix"
@@ -39,6 +42,7 @@
             "error",
             "always"
         ],
+        "react/prop-types": 0,
         "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
         "react/no-unescaped-entities": ["error", {"forbid": [">", "}"]}]
     }
