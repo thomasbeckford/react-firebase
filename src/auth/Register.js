@@ -55,7 +55,7 @@ export default function Register(props) {
                      },
                   })}
                />
-               {errors.email && <p>{errors.email.message}</p>}
+               {errors.email && <p className="warning">{errors.email.message}</p>}
                <input
                   name="password"
                   placeholder="Password"
@@ -68,7 +68,7 @@ export default function Register(props) {
                      },
                   })}
                />
-               {errors.password && <p>{errors.password.message}</p>}
+               {errors.password && <p className="warning">{errors.password.message}</p>}
                
                <input 
                   type="password" 
@@ -84,7 +84,7 @@ export default function Register(props) {
                   placeholder="Confirm Password"
                   required
                />
-               {errors.password && <p>{errors.newPassword.message}</p>}
+               {errors.password && <p className="warning">{errors.newPassword.message}</p>}
                <input type="submit" disabled={!formState.isValid} onClick={handleSubmit(handleRegister)} value="REGISTER" />
             </form>
          </div>

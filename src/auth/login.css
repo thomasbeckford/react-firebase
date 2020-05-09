@@ -32,11 +32,22 @@ h1 {
   margin: 0 auto;
 }
 
-p {
+
+span.link {
+  color: #2196f3;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+span.link:hover{
+  cursor: pointer;
   color: #bf1650;
 }
 
-p::before {
+p.warning {
+  color: #bf1650;
+}
+
+p.warning::before {
   display: inline;
   content: "⚠ ";
 }

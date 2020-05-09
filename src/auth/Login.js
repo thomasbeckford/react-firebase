@@ -55,7 +55,7 @@ export default function Login(props) {
                      },
                   })}
                />
-               {errors.email && <p>{errors.email.message}</p>}
+               {errors.email && <p className="warning">{errors.email.message}</p>}
                <input
                   name="password"
                   placeholder="Password"
@@ -68,7 +68,9 @@ export default function Login(props) {
                      },
                   })}
                />
-               {errors.password && <p>{errors.password.message}</p>}
+               {errors.password && <p className="warning">{errors.password.message}</p>}
+
+               <span className="link">Forgot password?</span><span> 🤦</span>
                <input type="submit" disabled={!formState.isValid} onClick={handleSubmit(handleEmailLogin)} value="LOG IN" />
             </form>
          </div>
