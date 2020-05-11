@@ -1,15 +1,13 @@
-import React, { useState,useContext, useCallback } from "react";
-import { DispatchContext } from "../store";
+import React, { useState } from "react";
+
 import "./login.css";
 import * as firebase from "firebase";
 import { useForm } from "react-hook-form";
-import { severity } from "../snackbar/CustomizedSnackbar";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
 export default function Login(props) {
 
-   const dispatch = useContext(DispatchContext);
    const { register, handleSubmit,errors , formState } = useForm({ mode: "onChange" });
    const [error, setError] = useState("");
 
@@ -20,16 +18,6 @@ export default function Login(props) {
             setError(e.message);
          });
    };
-
-   const handlePasswordReset = (emailReset) =>{
-      return firebase.auth().sendPasswordResetEmail(emailReset);
-   };
-
-
-   //Snackbar
-   const openSnackbar = useCallback((severity, text) => {
-      dispatch({ type: "openSnackBar", payload: { severity, text }});
-   }, [dispatch]);
    
    return (
       <div className="sign-in">
@@ -69,8 +57,14 @@ export default function Login(props) {
                   })}
                />
                {errors.password && <p className="warning">{errors.password.message}</p>}
-
-               <span className="link">Forgot password?</span><span> 🤦</span>
+               
+               <Box color="primary.contrastText" display="flex" >
+                  <Button
+                     variant="contained"
+                     color="primary"
+                     onClick={()=>{props.setPage("resetpassword");}}>FORGOT PASSWORD? 🤦
+                  </Button>
+               </Box>
                <input type="submit" disabled={!formState.isValid} onClick={handleSubmit(handleEmailLogin)} value="LOG IN" />
             </form>
          </div>

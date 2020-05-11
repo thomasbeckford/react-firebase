@@ -43,7 +43,7 @@ export default function Register(props) {
                </Button>
             </Box>
             <form>
-               {error && <p>{error}</p>}
+               {error && <p className="warning">{error}</p>}
                <input
                   name="email"
                   placeholder="Email"

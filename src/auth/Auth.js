@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "./Login";
 import Register from "./Register";
+import ResetPassword from "./ResetPassword";
 
 export default function Auth() {
 
@@ -8,6 +9,7 @@ export default function Auth() {
 
    if(page === "register") return <Register setPage={setPage} />;
    if(page === "login") return <Login setPage={setPage} />;
+   if(page === "resetpassword") return <ResetPassword setPage={setPage} />;
    
    return (
       <div>

@@ -1,33 +1,35 @@
-import React, { useState,useContext, useCallback } from "react";
-import { DispatchContext } from "../store";
+import React, {useState} from "react";
 import "./login.css";
 import * as firebase from "firebase";
 import { useForm } from "react-hook-form";
-import { severity } from "../snackbar/CustomizedSnackbar";
+
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 
 export default function ResetPassword(props) {
 
-   const dispatch = useContext(DispatchContext);
-   const { register, handleSubmit,errors , formState } = useForm({ mode: "onChange" });
+
+   const { register, handleSubmit,errors, formState } = useForm({ mode: "onChange" });
    const [error, setError] = useState("");
-  
 
 
    const handlePasswordReset = (emailReset) =>{
-      return firebase.auth().sendPasswordResetEmail(emailReset);
+      const promise = firebase.auth().sendPasswordResetEmail(emailReset);
+      console.log(promise);
    };
-
-
-   //Snackbar
-   const openSnackbar = useCallback((severity, text) => {
-      dispatch({ type: "openSnackBar", payload: { severity, text }});
-   }, [dispatch]);
 
    return (
       <div className="sign-in">
          <h1>Reset password</h1>
+         <Box color="primary.contrastText" display="flex" >
+            <Button
+               variant="contained"
+               color="primary"
+               onClick={()=>{props.setPage("login");}}>Login
+            </Button>
+         </Box>
          <form>
-            {error && <p>{error}</p>}
+            {error && <p className="warning">{error}</p>}
             <input
                name="emailReset"
                placeholder="Email"
@@ -39,8 +41,8 @@ export default function ResetPassword(props) {
                   },
                })}
             />
-            {errors.email && <p>{errors.email.message}</p>}
-            <input type="submit" onClick={handleSubmit(handlePasswordReset)} value="RESET PASSWORD" />
+            {errors.email && <p className="warning">{errors.email.message}</p>}
+            <input type="submit" disabled={!formState.isValid} onClick={handleSubmit(handlePasswordReset)} value="RESET PASSWORD" />
          </form>
       </div>
 
