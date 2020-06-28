@@ -1,49 +1,30 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "node": true
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"extends": [
+		"react-app"
+	],
+	"parserOptions": {
+		"ecmaVersion": 2017
+	  },
+	"rules": {
+        "func-names": 0,
+        "indent": ["error", "tab"],
+        "no-console": 0,
+        "no-tabs": 0,
+		"semi": [2, "never"],
+		"eol-last": ["error", "always"]
     },
-    "settings": {
-        "react": {
-          "version": "detect"
-        }
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2020,
-        "sourceType": "module"
-    },
-    "parser": "babel-eslint",
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "indent":[1, 3],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "react/prop-types": 0,
-        "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
-        "react/no-unescaped-entities": ["error", {"forbid": [">", "}"]}]
-    }
+	"overrides": [
+		{
+			"files": [
+				"**/*.test.js"
+			],
+			"env": {
+				"jest": true
+			}
+		}
+	]
 }
