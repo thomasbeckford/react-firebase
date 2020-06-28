@@ -43,8 +43,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "console.log('PrePushExample)",
-      "...": "..."
+      "pre-push": "",
+      "pre-commit": ""
     }
   }
 }
