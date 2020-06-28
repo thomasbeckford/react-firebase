@@ -59,17 +59,10 @@ const StateProvider = ({ children }) => {
   return (
     <AuthStateContext.Provider value={state.auth}>
       <SnackbarStateContext.Provider value={state.snackbar}>
-        <DispatchContext.Provider value={dispatch}>
-          {children}
-        </DispatchContext.Provider>
+        <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
       </SnackbarStateContext.Provider>
     </AuthStateContext.Provider>
   )
 }
 
-export {
-  AuthStateContext,
-  SnackbarStateContext,
-  DispatchContext,
-  StateProvider,
-}
+export { AuthStateContext, SnackbarStateContext, DispatchContext, StateProvider }

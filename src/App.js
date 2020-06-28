@@ -59,7 +59,7 @@ function App(props) {
           <Route component={PageNotFound} />
         </Switch>
       ) : (
-        <Redirect to="/" />
+        <Redirect to='/' />
       )}
     </div>
   )

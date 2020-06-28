@@ -36,11 +36,7 @@ function Logout(props) {
 
   return (
     <div className={classes.root}>
-      <Button
-        onClick={() => handleLogout()}
-        variant="contained"
-        color="primary"
-      >
+      <Button onClick={() => handleLogout()} variant='contained' color='primary'>
         LOG OUT
       </Button>
     </div>

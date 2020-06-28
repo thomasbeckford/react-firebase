@@ -14,7 +14,6 @@ export default function Home() {
     (severity, text) => {
       dispatch({ type: 'openSnackBar', payload: { severity, text } })
     },
-
     [dispatch]
   )
 
@@ -28,30 +27,16 @@ export default function Home() {
 
   return (
     <div>
-      <Typography align="center" variant="h2">
+      <Typography align='center' variant='h2'>
         Bienvenido {authState.user}
       </Typography>
 
-      <Box
-        bgcolor="secondary.main"
-        color="primary.contrastText"
-        display="flex"
-        justifyContent="space-around"
-        p={1}
-      >
-        <Button
-          onClick={() => handleSuccess()}
-          variant="contained"
-          color="primary"
-        >
+      <Box bgcolor='secondary.main' color='primary.contrastText' display='flex' justifyContent='space-around' p={1}>
+        <Button onClick={() => handleSuccess()} variant='contained' color='primary'>
           TRY SUCCESS SNACKBAR!
         </Button>
 
-        <Button
-          onClick={() => handleError()}
-          variant="contained"
-          color="secondary"
-        >
+        <Button onClick={() => handleError()} variant='contained' color='secondary'>
           TRY ERROR SNACKBAR!
         </Button>
       </Box>

@@ -15,26 +15,25 @@ export default function Login(props) {
   }
 
   return (
-    <div className="sign-in">
-      <Typography variant="h4" color="primary" align="center">
+    <div className='sign-in'>
+      <Typography variant='h4' color='primary' align='center'>
         Login
       </Typography>
-      <Box color="primary.contrastText" display="flex">
+      <Box color='primary.contrastText' display='flex'>
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           onClick={() => {
             props.setPage('register')
-          }}
-        >
+          }}>
           Register
         </Button>
       </Box>
       <form>
-        {error && <p className="warning">{error}</p>}
+        {error && <p className='warning'>{error}</p>}
         <input
-          name="email"
-          placeholder="Email"
+          name='email'
+          placeholder='Email'
           ref={register({
             required: 'email is required',
             pattern: {
@@ -43,11 +42,11 @@ export default function Login(props) {
             },
           })}
         />
-        {errors.email && <p className="warning">{errors.email.message}</p>}
+        {errors.email && <p className='warning'>{errors.email.message}</p>}
         <input
-          name="password"
-          placeholder="Password"
-          type="password"
+          name='password'
+          placeholder='Password'
+          type='password'
           ref={register({
             required: 'password is required',
             pattern: {
@@ -56,27 +55,19 @@ export default function Login(props) {
             },
           })}
         />
-        {errors.password && (
-          <p className="warning">{errors.password.message}</p>
-        )}
+        {errors.password && <p className='warning'>{errors.password.message}</p>}
 
-        <Box color="primary.contrastText" display="flex">
+        <Box color='primary.contrastText' display='flex'>
           <Button
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             onClick={() => {
               props.setPage('resetpassword')
-            }}
-          >
+            }}>
             FORGOT PASSWORD?
           </Button>
         </Box>
-        <input
-          type="submit"
-          disabled={!formState.isValid}
-          onClick={handleSubmit(handleEmailLogin)}
-          value="LOG IN"
-        />
+        <input type='submit' disabled={!formState.isValid} onClick={handleSubmit(handleEmailLogin)} value='LOG IN' />
       </form>
     </div>
   )

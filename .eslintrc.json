@@ -2,7 +2,7 @@
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 2019,
+    "ecmaVersion": 2017,
     "ecmaFeatures": {
       "modules": true
     }
