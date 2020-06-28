@@ -1,17 +1,23 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import App from "./App"
-import * as serviceWorker from "./serviceWorker"
-import { BrowserRouter as Router } from "react-router-dom"
-import { StateProvider } from "./store"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import * as serviceWorker from './serviceWorker'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { StateProvider } from './store'
+
+// Material UI Theme
+import theme from './Theme'
+import { ThemeProvider } from '@material-ui/core'
 
 ReactDOM.render(
-	<StateProvider>
-		<Router>
-			<App />
-		</Router>
-	</StateProvider>,
-	document.getElementById("root")
+  <ThemeProvider theme={theme}>
+    <StateProvider>
+      <Router>
+        <App />
+      </Router>
+    </StateProvider>
+  </ThemeProvider>,
+  document.getElementById('root')
 )
 
 // If you want your app to work offline and load faster, you can change
