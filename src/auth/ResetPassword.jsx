@@ -1,6 +1,6 @@
 import React, { useState, useContext, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
-import { Box, Button, Typography } from '@material-ui/core'
+import { Container, Box, Button, Typography } from '@material-ui/core'
 import { doPasswordReset } from '../firebase/auth'
 import { DispatchContext } from '../store'
 import { severity } from '../snackbar/CustomizedSnackbar'
@@ -23,7 +23,7 @@ export default function ResetPassword(props) {
 
   const handlePasswordReset = (e) => {
     setError(null)
-    doPasswordReset(e.emailReset)
+    doPasswordReset(e.email)
       .then(() => {
         openSnackbar(severity.INFO, 'Email Sent.')
       })
@@ -33,26 +33,16 @@ export default function ResetPassword(props) {
   }
 
   return (
-    <div className="sign-in">
-      <Typography variant="h4" color="primary" align="center">
+    <>
+      <Typography variant='h4' color='primary' align='center'>
         Reset Password
       </Typography>
-      <Box color="primary.contrastText" display="flex">
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            props.setPage('login')
-          }}
-        >
-          Login
-        </Button>
-      </Box>
-      <form>
-        {error && <p className="warning">{error}</p>}
+
+      <Container maxWidth='sm'>
+        {error && <p className='warning'>{error}</p>}
         <input
-          name="emailReset"
-          placeholder="Email"
+          name='email'
+          placeholder='Email'
           ref={register({
             required: 'email is required',
             pattern: {
@@ -61,14 +51,25 @@ export default function ResetPassword(props) {
             },
           })}
         />
-        {errors.email && <p className="warning">{errors.email.message}</p>}
+
         <input
-          type="submit"
+          type='submit'
           disabled={!formState.isValid}
           onClick={handleSubmit(handlePasswordReset)}
-          value="RESET PASSWORD"
+          value='RESET PASSWORD'
         />
-      </form>
-    </div>
+        <Box color='primary.contrastText' display='flex' style={{ marginBottom: '1em' }}>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={() => {
+              props.setPage('login')
+            }}>
+            Login
+          </Button>
+        </Box>
+        {errors.email && <Typography className='warning'>{errors.email.message}</Typography>}
+      </Container>
+    </>
   )
 }

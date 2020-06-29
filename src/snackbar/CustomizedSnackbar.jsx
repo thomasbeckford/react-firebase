@@ -56,19 +56,16 @@ const MySnackbarContentWrapper = React.forwardRef((props, ref) => {
     <SnackbarContent
       ref={ref}
       className={clsx(classes[variant], className)}
-      aria-describedby="client-snackbar"
+      aria-describedby='client-snackbar'
       message={
         <div style={{ display: 'flex', width: '350px' }}>
           <div style={props.loading ? { paddingTop: '3px' } : null}>
             {props.loading ? (
-              <CircularProgress color="inherit" size={18} />
+              <CircularProgress color='inherit' size={18} />
             ) : (
               <>
                 {Icon ? (
-                  <Icon
-                    style={{ marginBottom: '-4px' }}
-                    className={clsx(classes.icon, classes.iconVariant)}
-                  />
+                  <Icon style={{ marginBottom: '-4px' }} className={clsx(classes.icon, classes.iconVariant)} />
                 ) : null}
               </>
             )}
@@ -79,11 +76,8 @@ const MySnackbarContentWrapper = React.forwardRef((props, ref) => {
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
-            }}
-          >
-            {typeof message == 'object' || Array.isArray(message)
-              ? 'An unexpected error occured.'
-              : message}
+            }}>
+            {typeof message == 'object' || Array.isArray(message) ? 'An unexpected error occured.' : message}
           </div>
         </div>
       }
@@ -108,7 +102,7 @@ const StyledSnackbar = withStyles({
 })(Snackbar)
 
 const SlideTransition = React.forwardRef((props, ref) => {
-  return <Slide {...props} ref={ref} direction="down" />
+  return <Slide {...props} ref={ref} direction='down' />
 })
 
 /**
@@ -117,9 +111,7 @@ const SlideTransition = React.forwardRef((props, ref) => {
  */
 export default function CustomizedSnackbar(props) {
   const state = useContext(SnackbarStateContext)
-  const loading = state.text
-    ? state.text.toString().toLowerCase().includes('loading')
-    : false
+  const loading = state.text ? state.text.toString().toLowerCase().includes('loading') : false
 
   useEffect(() => {
     switch (state.severity) {
@@ -152,8 +144,7 @@ export default function CustomizedSnackbar(props) {
           return
         }
         props.handleClose(event, reason)
-      }}
-    >
+      }}>
       <MySnackbarContentWrapper
         loading={loading}
         onClose={props.handleClose}

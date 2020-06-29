@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react'
 import { AuthStateContext, DispatchContext } from './store'
 import { severity } from './snackbar/CustomizedSnackbar'
 
-import { Box, Button, Typography } from '@material-ui/core'
+import { Box, Button, Typography, Container } from '@material-ui/core'
 
 export default function Home() {
   const dispatch = useContext(DispatchContext)
@@ -26,12 +26,11 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <Typography align='center' variant='h2'>
-        Bienvenido {authState.user}
+    <Container maxWidth='sm'>
+      <Typography color='primary' align='center' variant='h5'>
+        Welcome {authState.user}
       </Typography>
-
-      <Box bgcolor='secondary.main' color='primary.contrastText' display='flex' justifyContent='space-around' p={1}>
+      <Box display='flex' justifyContent='space-between' p={1}>
         <Button onClick={() => handleSuccess()} variant='contained' color='primary'>
           TRY SUCCESS SNACKBAR!
         </Button>
@@ -40,6 +39,6 @@ export default function Home() {
           TRY ERROR SNACKBAR!
         </Button>
       </Box>
-    </div>
+    </Container>
   )
 }

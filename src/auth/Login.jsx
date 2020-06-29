@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Box, Button, Typography } from '@material-ui/core'
+import { Container, Box, Button, Typography } from '@material-ui/core'
 import { doSignInWithEmailAndPassword } from '../firebase/auth'
 
 export default function Login(props) {
-  const { register, handleSubmit, errors, formState } = useForm()
+  const { register, handleSubmit, errors, formState } = useForm({ mode: 'onChange' })
   const [error, setError] = useState('')
 
   const handleEmailLogin = (data) => {
@@ -15,22 +15,11 @@ export default function Login(props) {
   }
 
   return (
-    <div className='sign-in'>
+    <>
       <Typography variant='h4' color='primary' align='center'>
         Login
       </Typography>
-      <Box color='primary.contrastText' display='flex'>
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={() => {
-            props.setPage('register')
-          }}>
-          Register
-        </Button>
-      </Box>
-      <form>
-        {error && <p className='warning'>{error}</p>}
+      <Container maxWidth='sm'>
         <input
           name='email'
           placeholder='Email'
@@ -42,21 +31,15 @@ export default function Login(props) {
             },
           })}
         />
-        {errors.email && <p className='warning'>{errors.email.message}</p>}
+
         <input
           name='password'
           placeholder='Password'
           type='password'
           ref={register({
             required: 'password is required',
-            pattern: {
-              value: /^[A-Za-z]+$/i,
-              message: 'Invalid password',
-            },
           })}
         />
-        {errors.password && <p className='warning'>{errors.password.message}</p>}
-
         <Box color='primary.contrastText' display='flex'>
           <Button
             variant='contained'
@@ -68,7 +51,22 @@ export default function Login(props) {
           </Button>
         </Box>
         <input type='submit' disabled={!formState.isValid} onClick={handleSubmit(handleEmailLogin)} value='LOG IN' />
-      </form>
-    </div>
+
+        <Box color='primary.contrastText' display='flex' style={{ marginBottom: '1em' }}>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={() => {
+              props.setPage('register')
+            }}>
+            Register
+          </Button>
+        </Box>
+
+        {error && <Typography className='warning'>{error}</Typography>}
+        {errors.email && <Typography className='warning'>{errors.email.message}</Typography>}
+        {errors.password && <Typography className='warning'>{errors.password.message}</Typography>}
+      </Container>
+    </>
   )
 }

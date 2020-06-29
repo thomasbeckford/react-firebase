@@ -4,7 +4,6 @@
 4. Login, Register, Logout functions with firebase and react-hook-form validation
 5. Home screen
 6. reset password
-
+7. ESLint Prettier
 
 // TODO:
-

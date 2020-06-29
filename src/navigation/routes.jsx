@@ -1,14 +1,7 @@
 import Home from '../Home'
 
 class Page {
-  constructor(
-    route,
-    component,
-    name,
-    visible = true,
-    admin = false,
-    icon = null
-  ) {
+  constructor(route, component, name, visible = true, admin = false, icon = null) {
     this.route = route
     this.component = component
     this.name = name
