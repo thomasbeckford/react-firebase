@@ -1,4 +1,6 @@
+import React from 'react'
 import Home from '../Home'
+import Search from '../Search/Search'
 
 class Page {
   constructor(route, component, name, visible = true, admin = false, icon = null) {
@@ -12,5 +14,13 @@ class Page {
 }
 
 export default {
-  mainPages: [new Page(['/home'], Home, 'Home')],
+  mainPages: [
+    new Page(['/home'], Home, 'Home'),
+    new Page(['/search'], Search, 'Search'),
+  ],
+  userPages: [
+		new Page(['/details'], <></>, 'Details'),
+		new Page(['/clients'], <></>, 'Clients'),
+		new Page(['/datalog'], <></>, 'Data Log'),
+	],
 }

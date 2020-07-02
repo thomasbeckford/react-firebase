@@ -1,28 +1,13 @@
-import React, { useContext, useCallback } from 'react'
-import { AuthStateContext, DispatchContext } from './store'
-import { severity } from './snackbar/CustomizedSnackbar'
-
+import React, { useContext } from 'react'
+import { AuthStateContext } from './store'
+import { withRouter } from 'react-router'
 import { Box, Button, Typography, Container } from '@material-ui/core'
 
-export default function Home() {
-  const dispatch = useContext(DispatchContext)
-
+ function Home(props) {
   const authState = useContext(AuthStateContext)
 
-  // Snackbar
-  const openSnackbar = useCallback(
-    (severity, text) => {
-      dispatch({ type: 'openSnackBar', payload: { severity, text } })
-    },
-    [dispatch]
-  )
-
-  const handleSuccess = () => {
-    openSnackbar(severity.SUCCESS, 'It Works!.')
-  }
-
-  const handleError = () => {
-    openSnackbar(severity.ERROR, 'New test error generated!.')
+  const redirectSearch = () =>{
+    props.history.push('/search')
   }
 
   return (
@@ -30,15 +15,11 @@ export default function Home() {
       <Typography color='primary' align='center' variant='h5'>
         Welcome {authState.user}
       </Typography>
-      <Box display='flex' justifyContent='space-between' p={1}>
-        <Button onClick={() => handleSuccess()} variant='contained' color='primary'>
-          TRY SUCCESS SNACKBAR!
-        </Button>
-
-        <Button onClick={() => handleError()} variant='contained' color='secondary'>
-          TRY ERROR SNACKBAR!
-        </Button>
+      <Box>
+        <Button onClick={()=> redirectSearch()}>Search Page</Button>
       </Box>
     </Container>
   )
 }
+
+export default withRouter(Home)

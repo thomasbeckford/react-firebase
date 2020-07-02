@@ -33,43 +33,42 @@ export default function ResetPassword(props) {
   }
 
   return (
-    <>
-      <Typography variant='h4' color='primary' align='center'>
-        Reset Password
-      </Typography>
+    <Container maxWidth='sm'>
+      <Box p={5}>
+        <Typography variant='h4' color='primary' align='center'>
+          Reset Password
+        </Typography>
+      </Box>
+      {error && <p className='warning'>{error}</p>}
+      <input
+        name='email'
+        placeholder='Email'
+        ref={register({
+          required: 'email is required',
+          pattern: {
+            value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+            message: 'Invalid email address',
+          },
+        })}
+      />
 
-      <Container maxWidth='sm'>
-        {error && <p className='warning'>{error}</p>}
-        <input
-          name='email'
-          placeholder='Email'
-          ref={register({
-            required: 'email is required',
-            pattern: {
-              value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-              message: 'Invalid email address',
-            },
-          })}
-        />
-
-        <input
-          type='submit'
-          disabled={!formState.isValid}
-          onClick={handleSubmit(handlePasswordReset)}
-          value='RESET PASSWORD'
-        />
-        <Box color='primary.contrastText' display='flex' style={{ marginBottom: '1em' }}>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={() => {
-              props.setPage('login')
-            }}>
-            Login
-          </Button>
-        </Box>
-        {errors.email && <Typography className='warning'>{errors.email.message}</Typography>}
-      </Container>
-    </>
+      <input
+        type='submit'
+        disabled={!formState.isValid}
+        onClick={handleSubmit(handlePasswordReset)}
+        value='RESET PASSWORD'
+      />
+      <Box color='primary.contrastText' display='flex' style={{ marginBottom: '1em' }}>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={() => {
+            props.setPage('login')
+          }}>
+          Login
+        </Button>
+      </Box>
+      {errors.email && <Typography className='warning'>{errors.email.message}</Typography>}
+    </Container>
   )
 }

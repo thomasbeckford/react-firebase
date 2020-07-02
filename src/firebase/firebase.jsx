@@ -23,6 +23,4 @@ if (!firebase.apps.length) {
 const db = firebase.database()
 const auth = firebase.auth()
 
-const facebookProvider = new firebase.auth.FacebookAuthProvider()
-
-export { db, auth, facebookProvider }
+export { db, auth }

@@ -1,21 +1,24 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Switch, Redirect } from 'react-router-dom'
 import { withRouter, Route } from 'react-router'
 import { AuthStateContext, DispatchContext } from './store'
 import AuthRouter from './auth/AuthRouter'
 import routes from './navigation/routes'
-import firebase from 'firebase/app'
+import {auth} from './firebase/firebase'
 import Navbar from './navbar/navbar'
 import CustomizedSnackbar from './snackbar/CustomizedSnackbar'
 import PageNotFound from './pageNotFound'
 import './App.css'
+import CircularLoading from './navigation/CircularLoading'
 
 function App(props) {
   const authState = useContext(AuthStateContext)
   const dispatch = useContext(DispatchContext)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setLoading(false)
       if (user) {
         dispatch({ type: 'login', payload: user.email })
         props.history.push('/home')
@@ -27,14 +30,15 @@ function App(props) {
     }
   }, [props.history, dispatch])
 
+
   const closeSnackbar = () => {
     dispatch({ type: 'closeSnackBar' })
   }
 
   const innerContent = (
-    <div>
+    <>
       <Route exact path={'/'} component={AuthRouter} />
-      {authState?.authenticated !== false ? (
+      {authState?.authenticated ? (
         <Switch>
           {routes.mainPages.map((page) => {
             const CurrentComponent = page.component
@@ -50,14 +54,17 @@ function App(props) {
       ) : (
         <Redirect to='/' />
       )}
-    </div>
+    </>
   )
 
   return (
+    loading ? 
+      <CircularLoading /> :
     <React.Fragment>
       {innerContent}
       <CustomizedSnackbar handleClose={() => closeSnackbar()} />
     </React.Fragment>
+  
   )
 }
 

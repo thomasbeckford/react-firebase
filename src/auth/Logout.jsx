@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { DispatchContext } from '../store'
 import { withRouter } from 'react-router'
-import { makeStyles, Typography } from '@material-ui/core'
+import { makeStyles, Typography, MenuItem } from '@material-ui/core'
 import { doSignOut } from '../firebase/auth'
 
 const useStyles = makeStyles((theme) => ({
@@ -25,11 +25,24 @@ function Logout(props) {
   }
 
   return (
-    <div className={classes.root}>
-      <Typography onClick={() => handleLogout()} variant='contained' color='secondary'>
+    <>
+    <MenuItem onClick={() => handleLogout()} className={classes.root} >
+      <Typography variant='body1' color='secondary'>
         LOG OUT
       </Typography>
-    </div>
+    </MenuItem>
+    <MenuItem onClick={() => handleLogout()} className={classes.root} >
+      <Typography variant='body1' color='secondary'>
+        LOG OUT
+      </Typography>
+    </MenuItem>
+    <MenuItem onClick={() => handleLogout()} className={classes.root} >
+      <Typography variant='body1' color='secondary'>
+        LOG OUT
+      </Typography>
+    </MenuItem>
+
+  </>
   )
 }
 

@@ -68,9 +68,7 @@ function Navbar() {
               }}
               open={open}
               onClose={handleClose}>
-              <MenuItem onClick={handleClose}>
                 <Logout />
-              </MenuItem>
             </Menu>
           </div>
         </Toolbar>

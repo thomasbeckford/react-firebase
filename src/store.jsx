@@ -55,7 +55,7 @@ const StateProvider = ({ children }) => {
         throw new Error()
     }
   }, initialState)
-
+  
   return (
     <AuthStateContext.Provider value={state.auth}>
       <SnackbarStateContext.Provider value={state.snackbar}>
