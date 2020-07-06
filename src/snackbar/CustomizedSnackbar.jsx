@@ -58,7 +58,7 @@ const MySnackbarContentWrapper = React.forwardRef((props, ref) => {
       className={clsx(classes[variant], className)}
       aria-describedby='client-snackbar'
       message={
-        <div style={{ display: 'flex', width: '350px' }}>
+        <div style={{ display: 'flex', width: 'auto' }}>
           <div style={props.loading ? { paddingTop: '3px' } : null}>
             {props.loading ? (
               <CircularProgress color='inherit' size={18} />

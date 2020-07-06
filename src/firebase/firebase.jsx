@@ -1,6 +1,8 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
+import 'firebase/firestore'
+
 require('dotenv').config()
 //this config is being used for both development and production environment. Though, it is a best practice creating a second project and have two configs: one for production (prodConfig) and another for development (devConfig), so you choose the config based on the environment.
 
@@ -22,5 +24,6 @@ if (!firebase.apps.length) {
 //separting database API and authentication
 const db = firebase.database()
 const auth = firebase.auth()
+const firestore = firebase.firestore()
 
-export { db, auth }
+export { db, auth, firestore }

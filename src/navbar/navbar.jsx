@@ -4,12 +4,12 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
-import PersonIcon from '@material-ui/icons/Person'
+import MenuIcon from '@material-ui/icons/Menu'
 import FormGroup from '@material-ui/core/FormGroup'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import Logout from '../auth/Logout'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Navbar() {
+function Navbar(props) {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
 
-  const handleMenu = (event) => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -38,7 +38,7 @@ function Navbar() {
 
   return (
     <div className={classes.root}>
-      <FormGroup></FormGroup>
+      <FormGroup />
       <AppBar color='secondary' position='static'>
         <Toolbar>
           <Typography variant='h6' className={classes.title}>
@@ -49,26 +49,29 @@ function Navbar() {
               aria-label='account of current user'
               aria-controls='menu-appbar'
               aria-haspopup='true'
-              onClick={handleMenu}
+              onClick={handleClick}
               color='primary'
               size='small'>
-              <PersonIcon />
+              <MenuIcon fontSize='large' />
             </IconButton>
             <Menu
               id='menu-appbar'
               anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={open}
               onClose={handleClose}>
+              <MenuItem>
                 <Logout />
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose()
+                  props.history.push('profile')
+                }}>
+                Profile
+              </MenuItem>
             </Menu>
           </div>
         </Toolbar>

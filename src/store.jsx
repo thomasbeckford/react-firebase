@@ -17,11 +17,11 @@ const SnackbarStateContext = createContext(initialState.snackbar)
 const DispatchContext = createContext(undefined)
 
 const StateProvider = ({ children }) => {
-  const [state, dispatch] = useReducer((state, action) => {
+  const [state, dispatch] = useReducer((innerState, action) => {
     switch (action.type) {
       case 'login':
         return {
-          ...state,
+          ...innerState,
           auth: {
             user: action.payload,
             authenticated: true,
@@ -29,7 +29,7 @@ const StateProvider = ({ children }) => {
         }
       case 'logout':
         return {
-          ...state,
+          ...innerState,
           auth: {
             user: null,
             authenticated: false,
@@ -37,7 +37,7 @@ const StateProvider = ({ children }) => {
         }
       case 'openSnackBar':
         return {
-          ...state,
+          ...innerState,
           snackbar: {
             ...action.payload,
             open: true,
@@ -45,9 +45,9 @@ const StateProvider = ({ children }) => {
         }
       case 'closeSnackBar':
         return {
-          ...state,
+          ...innerState,
           snackbar: {
-            ...state.snackbar,
+            ...innerState.snackbar,
             open: false,
           },
         }
@@ -55,7 +55,7 @@ const StateProvider = ({ children }) => {
         throw new Error()
     }
   }, initialState)
-  
+
   return (
     <AuthStateContext.Provider value={state.auth}>
       <SnackbarStateContext.Provider value={state.snackbar}>
