@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { Switch } from 'react-router-dom'
-import { withRouter, Route } from 'react-router'
+import { withRouter, Route, Redirect } from 'react-router'
 import { AuthStateContext, DispatchContext } from './store'
 import AuthRouter from './auth/AuthRouter'
 import routes from './navigation/routes'
@@ -31,18 +31,22 @@ function App(props) {
   const innerContent = (
     <>
       <Route exact path={'/'} component={AuthRouter} />
-      <Switch>
-        {routes.mainPages.map((page) => {
-          const CurrentComponent = page.component
-          return (
-            <Route key={page.route[0]} path={page.route}>
-              <Navbar />
-              <CurrentComponent user={authState?.user} />
-            </Route>
-          )
-        })}
-        <Route component={PageNotFound} />
-      </Switch>
+      {authState.authenticated ? (
+        <Switch>
+          {routes.mainPages.map((page) => {
+            const CurrentComponent = page.component
+            return (
+              <Route key={page.route[0]} path={page.route}>
+                <Navbar />
+                <CurrentComponent user={authState?.user} />
+              </Route>
+            )
+          })}
+          <Route component={PageNotFound} />
+        </Switch>
+      ) : (
+        <Redirect to='/' />
+      )}
     </>
   )
 

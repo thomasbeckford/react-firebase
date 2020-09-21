@@ -1,6 +1,6 @@
 import React, { useState, useContext, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
-import { Container, Box, Button, Typography } from '@material-ui/core'
+import { Container, Box, Link, Typography } from '@material-ui/core'
 import { doPasswordReset } from '../firebase/auth'
 import { DispatchContext } from '../store'
 import { severity } from '../snackbar/CustomizedSnackbar'
@@ -25,7 +25,8 @@ export default function ResetPassword(props) {
     setError(null)
     doPasswordReset(e.email)
       .then(() => {
-        openSnackbar(severity.INFO, 'Email Sent.')
+        openSnackbar(severity.INFO, 'Reset password steps sent to email.')
+        props.setPage('login')
       })
       .catch((e) => openSnackbar(severity.ERROR, e.message))
   }
@@ -50,19 +51,16 @@ export default function ResetPassword(props) {
           })}
         />
 
-        <input type='submit' disabled={!formState.isValid} value='RESET PASSWORD' />
-        <Box color='primary.contrastText' display='flex' style={{ marginBottom: '1em' }}>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={() => {
-              props.setPage('login')
-            }}>
-            Login
-          </Button>
-        </Box>
+        <input
+          type='submit'
+          disabled={!formState.isValid}
+          value='RESET PASSWORD'
+        />
+
         {error && <Typography className='warning'>{error}</Typography>}
-        {errors.email && <Typography className='warning'>{errors.email.message}</Typography>}
+        {errors.email && (
+          <Typography className='warning'>{errors.email.message}</Typography>
+        )}
       </form>
     </Container>
   )

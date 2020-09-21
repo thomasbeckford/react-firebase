@@ -4,6 +4,7 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { StateProvider } from './store'
+import { CssBaseline } from '@material-ui/core'
 
 // Material UI Theme
 import theme from './Theme'
@@ -13,6 +14,7 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <StateProvider>
       <Router>
+        <CssBaseline />
         <App />
       </Router>
     </StateProvider>

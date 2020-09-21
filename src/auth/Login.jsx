@@ -1,13 +1,15 @@
 import React, { useContext, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
-import { Container, Box, Button, Typography } from '@material-ui/core'
+import { Container, Box, Typography, Link } from '@material-ui/core'
 import { doSignInWithEmailAndPassword } from '../firebase/auth'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import { DispatchContext } from '../store'
 import { severity } from '../snackbar/CustomizedSnackbar'
 
 function Login(props) {
-  const { register, handleSubmit, errors, formState } = useForm({ mode: 'onChange' })
+  const { register, handleSubmit, errors, formState } = useForm({
+    mode: 'onChange',
+  })
   const dispatch = useContext(DispatchContext)
 
   //Snackbar
@@ -58,16 +60,7 @@ function Login(props) {
             required: 'password is required',
           })}
         />
-        <Box color='primary.contrastText' display='flex'>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={() => {
-              props.setPage('resetpassword')
-            }}>
-            FORGOT PASSWORD?
-          </Button>
-        </Box>
+
         <input
           type='submit'
           disabled={!formState.isValid}
@@ -75,19 +68,12 @@ function Login(props) {
           value='LOG IN'
         />
 
-        <Box color='primary.contrastText' display='flex' style={{ marginBottom: '1em' }}>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={() => {
-              props.setPage('register')
-            }}>
-            Register
-          </Button>
-        </Box>
-
-        {errors.email && <Typography className='warning'>{errors.email.message}</Typography>}
-        {errors.password && <Typography className='warning'>{errors.password.message}</Typography>}
+        {errors.email && (
+          <Typography className='warning'>{errors.email.message}</Typography>
+        )}
+        {errors.password && (
+          <Typography className='warning'>{errors.password.message}</Typography>
+        )}
       </form>
     </Container>
   )

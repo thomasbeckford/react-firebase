@@ -1,20 +1,26 @@
-import React from 'react'
-import Login from './Login'
-import Register from './Register'
-import ResetPassword from './ResetPassword'
+import React, { useState, useEffect } from 'react'
+
 import { auth } from '../firebase/firebase'
+import GuestPage from '../Guest/GuestPage'
+import CircularLoading from '../navigation/CircularLoading'
 
 export default function AuthRouter(props) {
-  const [page, setPage] = React.useState()
+  const [page, setPage] = React.useState('login')
+  const [loading, setLoading] = useState(false)
 
-  if (page === 'register') return <Register setPage={setPage} />
-  if (page === 'login') return <Login setPage={setPage} />
-  if (page === 'resetpassword') return <ResetPassword setPage={setPage} />
+  useEffect(() => {
+    setLoading(true)
+  }, [])
+
+  if (loading) return <CircularLoading />
 
   auth.onAuthStateChanged((user) => {
-    if (user) props.history.push('/home')
-    else setPage('login')
+    if (user) {
+      props.history.push('/home')
+    } else {
+      setLoading(false)
+    }
   })
 
-  return null
+  return <GuestPage page={page} setPage={setPage} />
 }

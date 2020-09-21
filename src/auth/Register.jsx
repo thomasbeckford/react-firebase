@@ -1,6 +1,6 @@
 import React, { useContext, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
-import { Container, Box, Button, Typography } from '@material-ui/core'
+import { Container, Box, Typography, Link } from '@material-ui/core'
 import { doCreateUserWithEmailAndPassword } from '../firebase/auth'
 import { firestore } from '../firebase/firebase'
 import { withRouter } from 'react-router-dom'
@@ -8,7 +8,9 @@ import { DispatchContext } from '../store'
 import { severity } from '../snackbar/CustomizedSnackbar'
 
 function Register(props) {
-  const { register, handleSubmit, errors, formState, watch } = useForm({ mode: 'onChange' })
+  const { register, handleSubmit, errors, formState, watch } = useForm({
+    mode: 'onChange',
+  })
   const dispatch = useContext(DispatchContext)
 
   //Snackbar
@@ -103,7 +105,8 @@ function Register(props) {
           type='password'
           name='new_password'
           ref={register({
-            validate: (value) => value === watch('password') || "Passwords don't match.",
+            validate: (value) =>
+              value === watch('password') || "Passwords don't match.",
             required: 'Confirm password is required',
           })}
           placeholder='Confirm Password'
@@ -111,22 +114,27 @@ function Register(props) {
         />
         <input type='submit' disabled={!formState.isValid} value='REGISTER' />
 
-        <Box color='primary.contrastText' display='flex' style={{ marginBottom: '1em' }}>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={() => {
-              props.setPage('login')
-            }}>
-            Login
-          </Button>
-        </Box>
-
-        {errors.first_name && <Typography className='warning'>{errors.first_name.message}</Typography>}
-        {errors.last_name && <Typography className='warning'>{errors.last_name.message}</Typography>}
-        {errors.email && <Typography className='warning'>{errors.email.message}</Typography>}
-        {errors.password && <Typography className='warning'>{errors.password.message}</Typography>}
-        {errors.new_password && <Typography className='warning'>{errors.new_password.message}</Typography>}
+        {errors.first_name && (
+          <Typography className='warning'>
+            {errors.first_name.message}
+          </Typography>
+        )}
+        {errors.last_name && (
+          <Typography className='warning'>
+            {errors.last_name.message}
+          </Typography>
+        )}
+        {errors.email && (
+          <Typography className='warning'>{errors.email.message}</Typography>
+        )}
+        {errors.password && (
+          <Typography className='warning'>{errors.password.message}</Typography>
+        )}
+        {errors.new_password && (
+          <Typography className='warning'>
+            {errors.new_password.message}
+          </Typography>
+        )}
       </form>
     </Container>
   )
