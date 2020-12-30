@@ -1,6 +1,6 @@
 import React, { useContext, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
-import { Container, Box, Typography, Link } from '@material-ui/core'
+import { Container, Box, Typography } from '@material-ui/core'
 import { doSignInWithEmailAndPassword } from '../firebase/auth'
 import { withRouter } from 'react-router-dom'
 import { DispatchContext } from '../store'
@@ -36,7 +36,7 @@ function Login(props) {
     <Container maxWidth='sm'>
       <form onSubmit={handleSubmit(handleEmailLogin)}>
         <Box p={5}>
-          <Typography variant='h4' color='primary' align='center'>
+          <Typography variant='h4' color='white' align='center'>
             Login
           </Typography>
         </Box>

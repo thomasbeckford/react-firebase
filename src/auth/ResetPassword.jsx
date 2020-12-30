@@ -1,6 +1,6 @@
 import React, { useState, useContext, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
-import { Container, Box, Link, Typography } from '@material-ui/core'
+import { Container, Box, Typography } from '@material-ui/core'
 import { doPasswordReset } from '../firebase/auth'
 import { DispatchContext } from '../store'
 import { severity } from '../snackbar/CustomizedSnackbar'
@@ -35,7 +35,7 @@ export default function ResetPassword(props) {
     <Container maxWidth='sm'>
       <form onSubmit={handleSubmit(handlePasswordReset)}>
         <Box p={5}>
-          <Typography variant='h4' color='primary' align='center'>
+          <Typography variant='h4' color='white' align='center'>
             Reset Password
           </Typography>
         </Box>

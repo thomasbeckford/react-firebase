@@ -1,6 +1,6 @@
 import React, { useContext, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
-import { Container, Box, Typography, Link } from '@material-ui/core'
+import { Container, Box, Typography } from '@material-ui/core'
 import { doCreateUserWithEmailAndPassword } from '../firebase/auth'
 import { firestore } from '../firebase/firebase'
 import { withRouter } from 'react-router-dom'
@@ -50,7 +50,7 @@ function Register(props) {
     <Container maxWidth='sm'>
       <form onSubmit={handleSubmit(handleRegister)}>
         <Box p={5}>
-          <Typography variant='h4' color='primary' align='center'>
+          <Typography variant='h4' color='white' align='center'>
             Register
           </Typography>
         </Box>
