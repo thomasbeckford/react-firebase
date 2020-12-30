@@ -6,4 +6,6 @@
 6. reset password
 7. ESLint Prettier
 
-// TODO:
+
+![alt text](https://github.com/thomasbeckford/react-firebase/blob/master/public/image.png?raw=true)
+![alt text](https://github.com/thomasbeckford/react-firebase/blob/master/public/image1.png?raw=true)
